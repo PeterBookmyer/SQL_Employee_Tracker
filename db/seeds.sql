@@ -14,9 +14,9 @@ VALUES ("Software Engineer", 75000, 1),
 ("General Council", 130000, 4);
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ("Jerry", "Smith", 1, 3),
-("Greg", "Alan", 3, 2),
+VALUES ("Jerry", "Smith", 1, NULL),
+("Greg", "Alan", 3, NULL),
 ("Bobby", "Jones", 2, 1),
- ("Ted", "Roberts", 2, NULL),
-("Chris", "Scott", 1, NULL),
-("Pablo", "Saez", 3, NULL);
+ ("Ted", "Roberts", 2, 2),
+("Chris", "Scott", 1, 1),
+("Pablo", "Saez", 3, 1);
