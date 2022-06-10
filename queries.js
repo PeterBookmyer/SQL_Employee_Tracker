@@ -1,53 +1,101 @@
 const queries = require("./queries");
 const cTable = require("console.table");
 
-function viewAllByDepartment(db) {
-  db.query("SELECT * FROM department", function (err, results) {
+function viewAllByDepartment(db, startQuestions) {
+  db.query("SELECT * FROM department", (err, results) => {
     if (err) {
       console.log(err);
     }
     console.table(results);
+    startQuestions();
   });
 }
 
-function viewAllByRoles(db) {
-  db.query("SELECT * FROM roles", function (err, results) {
+function viewAllByRoles(db, startQuestions) {
+  db.query("SELECT * FROM roles", (err, results) => {
     if (err) {
       console.log(err);
     }
     console.table(results);
+    startQuestions();
   });
 }
 
-function viewAllByEmployee(db) {
-  db.query("SELECT * FROM employee", function (err, results) {
+function viewAllByEmployee(db, startQuestions) {
+  db.query("SELECT * FROM employee", (err, results) => {
     if (err) {
       console.log(err);
     }
     console.table(results);
+    startQuestions();
   });
 }
 
-// async function addEmployee(db) {
-//   const roleList = await db
-//     .promise()
-//     .query("SELECT * FROM roles", function (err, results) {
-//       return results;
-//     });
-//   //   const employeeList = await db.query("SELECT * FROM employee", function (err, results) {
-//   //       return results;
-//   //     });
-//   console.log(roleList);
-//   //   db.query("INSERT INTO employee", function (err, results) {
-//   //     if (err) {
-//   //       console.log(err);
-//   //     }
-//   //     console.table(results);
-//   //   });
-// }
+async function addDepartment(db, newDepartment, startQuestions) {
+  // const roleList = await db;
+
+  console.log(newDepartment);
+  db.query(
+    "INSERT INTO employee WHERE id = ?",
+    0,
+    newDepartment,
+    (err, results) => {
+      if (err) {
+        console.log(err);
+      }
+      console.table(results);
+    }
+  );
+  startQuestions();
+}
+
+async function addRole(db, newRole, newRoleSalary, startQuestions) {
+  // const roleList = await db;
+
+  console.log(newRole);
+  db.query(
+    "INSERT INTO roles WHERE id = ?",
+    0,
+    newRole,
+    newRoleSalary,
+    (err, results) => {
+      if (err) {
+        console.log(err);
+      }
+      console.table(results);
+    }
+  );
+  startQuestions();
+}
+
+async function addEmployee(
+  db,
+  newEmployeeFirst,
+  newEmployeeLast,
+  newEmployeeDeptId,
+  newEmployeeMgrId,
+  startQuestions
+) {
+  console.log(newEmployee);
+  db.query(
+    "INSERT INTO employee WHERE id = ?",
+    0,
+    newDepartment,
+    (err, results) => {
+      if (err) {
+        console.log(err);
+      }
+      console.table(results);
+    }
+  );
+  startQuestions();
+}
 
 module.exports = {
   viewAllByDepartment,
   viewAllByRoles,
   viewAllByEmployee,
+  addDepartment,
+  addRole,
+  addEmployee,
 };

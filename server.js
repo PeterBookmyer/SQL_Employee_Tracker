@@ -35,16 +35,83 @@ function startQuestions() {
     ])
     .then(({ startAnswer }) => {
       if (startAnswer === "View All Departments") {
-        return queries.viewAllByDepartment(db);
+        return queries.viewAllByDepartment(db, startQuestions);
       }
       if (startAnswer === "View All Roles") {
-        return queries.viewAllByRoles(db);
+        return queries.viewAllByRoles(db, startQuestions);
       }
       if (startAnswer === "View All Employees") {
-        return queries.viewAllByEmployee(db);
-      } else console.log("nope");
+        return queries.viewAllByEmployee(db, startQuestions);
+      }
+      if (startAnswer === "Add Department") {
+        inquirer
+          .prompt([
+            {
+              type: "Input",
+              message: "Please enter a Department Name",
+              name: "newDepartment",
+            },
+          ])
+          .then(({ newDepartment }) => {
+            return queries.addDepartment(db, newDepartment, startQuestions);
+          });
+      }
+      if (startAnswer === "Add a Role") {
+        inquirer
+          .prompt([
+            {
+              type: "Input",
+              message: "Please enter a Role Name",
+              name: "newDepartment",
+            },
+            {
+              type: "Input",
+              message: "Please enter a Role Salary",
+              name: "newRoleSalary",
+            },
+          ])
+          .then(({ newRole }) => {
+            return queries.addRole(db, newRole, newRoleSalary, startQuestions);
+          });
+      }
+      if (startAnswer === "Add Employee") {
+        inquirer
+          .prompt([
+            {
+              type: "Input",
+              message: "Please enter a Employee First Name",
+              name: "newEmployeeFirst",
+            },
+            {
+              type: "Input",
+              message: "Please enter a Employee Last Name",
+              name: "newEmployeeLast",
+            },
+            {
+              type: "list",
+              message: "Please Choose an Role ID",
+              choices: ["1", "2", "3", "4"],
+              name: "newEmployeeRoleId",
+            },
+            {
+              type: "list",
+              message: "Please Choose an Manager ID",
+              choices: ["1", "2", "3", "4"],
+              name: "newEmployeeMgrId",
+            },
+          ])
+          .then(({ newEmployee }) => {
+            return queries.addEmployee(
+              db,
+              newEmployeeFirst,
+              newEmployeeLast,
+              newEmployeeDeptId,
+              newEmployeeMgrId,
+              startQuestions
+            );
+          });
+      }
     });
 }
 
 startQuestions();
-
