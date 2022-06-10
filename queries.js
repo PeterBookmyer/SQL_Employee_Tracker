@@ -52,7 +52,7 @@ async function addDepartment(db, newDepartment, startQuestions) {
 async function addRole(db, newRole, newRoleSalary, startQuestions) {
   // const roleList = await db;
 
-  console.log(newRole);
+  console.log(newRole, newRoleSalary);
   db.query(
     "INSERT INTO roles WHERE id = ?",
     0,
@@ -72,15 +72,23 @@ async function addEmployee(
   db,
   newEmployeeFirst,
   newEmployeeLast,
-  newEmployeeDeptId,
+  newEmployeeRoleId,
   newEmployeeMgrId,
   startQuestions
 ) {
-  console.log(newEmployee);
+  console.log(
+    newEmployeeFirst,
+    newEmployeeLast,
+    newEmployeeRoleId,
+    newEmployeeMgrId
+  );
   db.query(
     "INSERT INTO employee WHERE id = ?",
     0,
-    newDepartment,
+    newEmployeeFirst,
+    newEmployeeLast,
+    newEmployeeRoleId,
+    newEmployeeMgrId,
     (err, results) => {
       if (err) {
         console.log(err);

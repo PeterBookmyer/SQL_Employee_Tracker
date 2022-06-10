@@ -62,7 +62,7 @@ function startQuestions() {
             {
               type: "Input",
               message: "Please enter a Role Name",
-              name: "newDepartment",
+              name: "newRole",
             },
             {
               type: "Input",
@@ -70,7 +70,7 @@ function startQuestions() {
               name: "newRoleSalary",
             },
           ])
-          .then(({ newRole }) => {
+          .then(({ newRole, newRoleSalary }) => {
             return queries.addRole(db, newRole, newRoleSalary, startQuestions);
           });
       }
@@ -100,16 +100,23 @@ function startQuestions() {
               name: "newEmployeeMgrId",
             },
           ])
-          .then(({ newEmployee }) => {
-            return queries.addEmployee(
-              db,
+          .then(
+            ({
               newEmployeeFirst,
               newEmployeeLast,
-              newEmployeeDeptId,
+              newEmployeeRoleId,
               newEmployeeMgrId,
-              startQuestions
-            );
-          });
+            }) => {
+              return queries.addEmployee(
+                db,
+                newEmployeeFirst,
+                newEmployeeLast,
+                newEmployeeRoleId,
+                newEmployeeMgrId,
+                startQuestions
+              );
+            }
+          );
       }
     });
 }
