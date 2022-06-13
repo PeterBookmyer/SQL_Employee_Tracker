@@ -64,14 +64,14 @@ function startQuestions() {
               message: "Please enter a Role Name",
               name: "newRole",
             },
-            {
-              type: "Input",
-              message: "Please enter a Role Salary",
-              name: "newRoleSalary",
-            },
+            // {
+            //   type: "Input",
+            //   message: "Please enter a Role Salary",
+            //   name: "newRoleSalary",
+            // },
           ])
           .then(({ newRole, newRoleSalary }) => {
-            return queries.addRole(db, newRole, newRoleSalary, startQuestions);
+            return queries.addRole(db, newRole, startQuestions);
           });
       }
       if (startAnswer === "Add Employee") {

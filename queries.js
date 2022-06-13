@@ -31,44 +31,29 @@ function viewAllByEmployee(db, startQuestions) {
   });
 }
 
-async function addDepartment(db, newDepartment, startQuestions) {
-  // const roleList = await db;
+function addDepartment(db, newDepartment, startQuestions) {
+  const sql = "INSERT INTO department (name) VALUES(?)";
 
-  console.log(newDepartment);
-  db.query(
-    "INSERT INTO employee WHERE id = ?",
-    0,
-    newDepartment,
-    (err, results) => {
-      if (err) {
-        console.log(err);
-      }
-      console.table(results);
+  db.query(sql, newDepartment, (err, results) => {
+    if (err) {
+      console.log(err);
     }
-  );
-  startQuestions();
+    viewAllByDepartment(db, startQuestions);
+  });
 }
 
-async function addRole(db, newRole, newRoleSalary, startQuestions) {
-  // const roleList = await db;
+function addRole(db, newRole, startQuestions) {
+  const sql = "INSERT INTO roles (title) VALUES(?)";
 
-  console.log(newRole, newRoleSalary);
-  db.query(
-    "INSERT INTO roles WHERE id = ?",
-    0,
-    newRole,
-    newRoleSalary,
-    (err, results) => {
-      if (err) {
-        console.log(err);
-      }
-      console.table(results);
+  db.query(sql, newRole, (err, results) => {
+    if (err) {
+      console.log(err);
     }
-  );
-  startQuestions();
+    viewAllByRoles(db, startQuestions);
+  });
 }
 
-async function addEmployee(
+function addEmployee(
   db,
   newEmployeeFirst,
   newEmployeeLast,
@@ -76,15 +61,16 @@ async function addEmployee(
   newEmployeeMgrId,
   startQuestions
 ) {
-  console.log(
-    newEmployeeFirst,
-    newEmployeeLast,
-    newEmployeeRoleId,
-    newEmployeeMgrId
-  );
+  const first = "INSERT INTO employee (first_name) VALUES(?)";
+  const last = "INSERT INTO employee (last_name) VALUES(?)";
+  const role = "INSERT INTO employee (role_id) VALUES(?)";
+  const mgr = "INSERT INTO employee (mgr_id) VALUES(?)";
+
   db.query(
-    "INSERT INTO employee WHERE id = ?",
-    0,
+    first,
+    last,
+    role,
+    mgr,
     newEmployeeFirst,
     newEmployeeLast,
     newEmployeeRoleId,
@@ -93,10 +79,16 @@ async function addEmployee(
       if (err) {
         console.log(err);
       }
-      console.table(results);
+      viewAllByEmployees(
+        db,
+        newEmployeeFirst,
+        newEmployeeLast,
+        newEmployeeRoleId,
+        newEmployeeMgrId,
+        startQuestions
+      );
     }
   );
-  startQuestions();
 }
 
 module.exports = {
