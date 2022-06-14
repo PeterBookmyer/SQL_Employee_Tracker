@@ -23,7 +23,7 @@ THEN I am prompted to select an employee to update and their new role and this i
 
 Installation: This application can be installed with a few easty steps - 1st: open up your mysql shell and source the schema.sql as well as the seeds.sql.  This will create the database as well as the tables of data.  You can then exit the shell.  2nd you can run node server.js in your terminal to launch the application.
 
-Usage: Once launched, a user can navigate thru terminal questions to view by department, view by role, or view employees.  This will display a table of data using console.table in your terminal.  A user can also choose to add a department, a role, an employee (work in progress), or update an existing employee role (work in progress)
+Usage: Once launched, a user can navigate thru terminal questions to view by department, view by role, or view employees.  This will display a table of data using console.table in your terminal.  A user can also choose to add a department, a role, an employee, or update an existing employee role (work in progress)
 
 
 License: No licenses were used

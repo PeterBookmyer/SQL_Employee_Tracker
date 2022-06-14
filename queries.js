@@ -61,32 +61,17 @@ function addEmployee(
   newEmployeeMgrId,
   startQuestions
 ) {
-  const first = "INSERT INTO employee (first_name) VALUES(?)";
-  const last = "INSERT INTO employee (last_name) VALUES(?)";
-  const role = "INSERT INTO employee (role_id) VALUES(?)";
-  const mgr = "INSERT INTO employee (mgr_id) VALUES(?)";
+  const sql =
+    "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES(?, ?, ?, ?)";
 
   db.query(
-    first,
-    last,
-    role,
-    mgr,
-    newEmployeeFirst,
-    newEmployeeLast,
-    newEmployeeRoleId,
-    newEmployeeMgrId,
+    sql,
+    [newEmployeeFirst, newEmployeeLast, newEmployeeRoleId, newEmployeeMgrId],
     (err, results) => {
       if (err) {
         console.log(err);
       }
-      viewAllByEmployees(
-        db,
-        newEmployeeFirst,
-        newEmployeeLast,
-        newEmployeeRoleId,
-        newEmployeeMgrId,
-        startQuestions
-      );
+      viewAllByEmployee(db, startQuestions);
     }
   );
 }
