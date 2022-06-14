@@ -42,10 +42,10 @@ function addDepartment(db, newDepartment, startQuestions) {
   });
 }
 
-function addRole(db, newRole, startQuestions) {
-  const sql = "INSERT INTO roles (title) VALUES(?)";
+function addRole(db, newRole, newRoleSalary, startQuestions) {
+  const sql = "INSERT INTO roles (title, salary) VALUES(?, ?)";
 
-  db.query(sql, newRole, (err, results) => {
+  db.query(sql, [newRole, newRoleSalary], (err, results) => {
     if (err) {
       console.log(err);
     }
